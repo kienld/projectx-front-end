@@ -139,7 +139,7 @@ function App() {
           <button type="button" className="button" onClick={tranfer}>Submit</button>
         </div>
         <br />
-        <h2>Approve</h2>
+        <h2>Approve bhg</h2>
         <div className="submit-container">
           <div className="submit-row">
             <input size="100"
