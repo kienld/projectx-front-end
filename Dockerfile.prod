@@ -1,0 +1,15 @@
+# build stage
+FROM node:13-alpine as build-stage
+WORKDIR /app
+COPY . .
+RUN npm install
+ARG REACT_APP_CONTRACT_ADDRESS
+ENV REACT_APP_CONTRACT_ADDRESS $REACT_APP_CONTRACT_ADDRESS
+RUN echo "REACT_APP_CONTRACT_ADDRESS=$REACT_APP_CONTRACT_ADDRESS" > .env
+RUN npm run build
+# => Run container
+FROM nginx:1.15.2-alpine
+# Static build
+COPY --from=build-stage /app/build /usr/share/nginx/html/
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]

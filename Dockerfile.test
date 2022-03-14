@@ -1,0 +1,9 @@
+# build stage
+FROM node:13-alpine as build-stage
+WORKDIR /app
+COPY . .
+ARG REACT_APP_CONTRACT_ADDRESS
+ENV REACT_APP_CONTRACT_ADDRESS $REACT_APP_CONTRACT_ADDRESS
+RUN echo "REACT_APP_CONTRACT_ADDRESS=$REACT_APP_CONTRACT_ADDRESS" > .env
+RUN npm install
+CMD ["npm", "run", "start"]
